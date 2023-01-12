@@ -24,15 +24,14 @@ public class Main {
             stack.push(i);
         }
 
+        while(!stack.isEmpty()){
+            answer[stack.pop()] = -1;
+        }
+        
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         for(int i=0;i<N;i++){
-            if(answer[i] == 0){
-                bw.write("-1 ");
-            }
-            else{
-                bw.write(answer[i] + " ");
-            }
+            bw.write(answer[i] + " ");
         }
         bw.close();
     }
