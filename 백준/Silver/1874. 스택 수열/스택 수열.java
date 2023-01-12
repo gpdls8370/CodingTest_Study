@@ -1,11 +1,13 @@
 import java.io.*;
-import java.util.*;
+import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Stack<Integer> stack = new Stack<>();
-        StringBuffer sb = new StringBuffer();
+
+        //BufferedWriter를 사용하면 버퍼가 일정량 이상 찼을때 비정기적으로 flush가 되기 때문에 "NO"출력 전에 출력초과가 날 수 있음
+        StringBuilder sb = new StringBuilder(); //StringBuffer는 멀티스레드에서 유리
 
         int N = Integer.parseInt(br.readLine());
         int nextNum = 1;
