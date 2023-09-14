@@ -11,7 +11,7 @@ int main() {
 
 	int N;
 	cin >> N;
-	vector<long> nums(N, 0);
+	vector<int> nums(N, 0);
 
 	for (int i = 0; i < N; i++) {
 		cin >> nums[i];
@@ -21,7 +21,7 @@ int main() {
 	int cnt = 0;
 
 	for (int i = 0; i < N; i++) {
-		long temp = nums[i];
+		int temp = nums[i];
 		int start = 0;
 		int end = N - 1;
 
