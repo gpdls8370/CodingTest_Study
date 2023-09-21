@@ -1,9 +1,10 @@
 #include <iostream>
-#include <stack>
 #include <vector>
 using namespace std;
 
-int GetNextStart(vector<bool> visited);
+void DFS(int num);
+vector<bool> visited;
+vector<vector<int>> linked;
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -13,9 +14,9 @@ int main() {
 	int N, M;
 	cin >> N >> M;
 
-	vector<bool> visited(N + 1, false);
-	vector<vector<int>> linked(N + 1);
-	stack<int> s;
+	visited = vector<bool>(N + 1, false);
+	linked.resize(N + 1);
+	
 	int cnt = 0;
 
 	for (int i = 0; i < M; i++) {
@@ -26,35 +27,22 @@ int main() {
 		linked[b].push_back(a);
 	}
 
-	while (true) {
-		int next = GetNextStart(visited);
-		
-		if (next == 0) break;
-
-		s.push(next);
-		visited[next] = true;
-
-		while (!s.empty()) {
-			int num = s.top();
-			s.pop();
-
-			for (int i = 0; i < linked[num].size(); i++) {
-				int linkNum = linked[num][i];
-				if (!visited[linkNum]) {
-					s.push(linkNum);
-					visited[linkNum] = true;
-				}	
-			}
+	for (int i = 1; i <= N; i++) {
+		if (!visited[i]) { 
+			DFS(i);
+			cnt++;
 		}
-		cnt++;
 	}
 
 	cout << cnt;
 }
 
-int GetNextStart(vector<bool> visited) {
-	for (int i = 1; i < visited.size(); i++) {
-		if (!visited[i]) return i;
+void DFS(int num) {
+	if (visited[num]) return;
+
+	visited[num] = true;
+
+	for (int next : linked[num]) {
+		if (!visited[next]) DFS(next);
 	}
-	return 0;
 }
