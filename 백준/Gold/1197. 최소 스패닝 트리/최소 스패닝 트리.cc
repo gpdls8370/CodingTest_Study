@@ -44,7 +44,7 @@ int main() {
 		que.pop();
 	
 		if (Find(e.s) != Find(e.e)) {
-			Union(e.s, e.e);
+			Union(e.e, e.s);
 			result += e.v;
 			count++;
 		}
