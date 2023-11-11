@@ -18,11 +18,10 @@ int main() {
 		cards.push(num);
 	}
 
-	long a , b;
 	for (int i = 0; i < m; i++) {
-		a = cards.top();
+		long a = cards.top();
 		cards.pop();
-		b = cards.top();
+		long b = cards.top();
 		cards.pop();
 
 		cards.push(a + b);
