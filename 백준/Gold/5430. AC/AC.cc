@@ -13,34 +13,33 @@ int main() {
 	int T;
 	cin >> T;
 
-	string p , str, num;
+	string p , str;
 	deque<int> que;
-	int n;
+	int n , num;
 	for (int i = 0; i < T; i++) {
 		cin >> p >> n >> str;
 		que.clear();
+		num = 0;
 
 		if (n != 0) {
 			for (int j = 1; j < str.length() - 1; j++) {
 				if (str[j] != ',') {
-					num += str[j];
+					num = num * 10 + (str[j] - '0');
 				}
 				else {
-					que.push_back( stoi(num));
-					num = "";
+					que.push_back(num);
+					num = 0;
 				}
 			}
-
-			que.push_back(stoi(num));
-			num = "";
+			que.push_back(num);
 		}
 
 		bool error = false;
-		bool reverse = false;
+		bool rev = false;
 
 		for (int j = 0; j < p.length(); j++) {
 			if (p[j] == 'R') {
-				reverse = !reverse;
+				rev = !rev;
 			}
 			else{
 				if (que.empty()) {
@@ -48,7 +47,7 @@ int main() {
 					error = true;
 					break;
 				}
-				reverse ? que.pop_back() : que.pop_front();
+				rev ? que.pop_back() : que.pop_front();
 			}
 		}
 
@@ -56,26 +55,16 @@ int main() {
 			if (que.empty()) {
 				cout << "[]\n";
 			}
-			else{
+			else {
 				cout << '[';
-				while (que.size() > 1)
+				if (rev) reverse(que.begin() , que.end());
+				while (!que.empty())
 				{
-					if (!reverse) {
-						cout << que.front() << ',';
-						que.pop_front();
-					}
-					else {
-						cout << que.back() << ',';
-						que.pop_back();
-					}
+					cout << que.front();
+					que.pop_front();
+					if (que.size() > 0) cout << ',';
 				}
-
-				if (!reverse) {
-					cout << que.front() << "]\n";
-				}
-				else {
-					cout << que.back() << "]\n";
-				}
+				cout << "]\n";
 			}
 		}
 	}
