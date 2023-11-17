@@ -1,9 +1,8 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
-vector<vector<bool>> visited;
-vector<vector<int>> map;
+bool visited[50][50];
+int map[50][50];
 int M , N;
 int dx[] = { 1,-1,0,0 };
 int dy[] = { 0,0,1,-1 };
@@ -35,8 +34,8 @@ int main() {
 		T--;
 		cin >> M >> N >> K;
 
-		map = vector<vector<int>>(M , vector<int>(N , 0));
-		visited = vector<vector<bool>>(M , vector<bool>(N , false));
+		fill_n(&map[0][0] , 2500 , 0);
+		fill_n(&visited[0][0] , 2500 , false);
 
 		for (int i = 0; i < K; i++) {
 			int a , b;
